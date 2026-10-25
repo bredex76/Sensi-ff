@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#08090d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SENSI FF">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Sensi FF — Sensibilidade inteligente</title>
+<style>
+:root{--bg:#08090d;--panel:#11131a;--panel2:#171a22;--red:#ff2948;--red2:#b90d2a;--text:#f5f6fa;--muted:#9ca3b2;--line:#282c37;--green:#43d49a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#21101a 0,#08090d 45%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;min-height:100vh}
+button,input{font:inherit}button{cursor:pointer}
+.app{max-width:520px;margin:0 auto;min-height:100vh;padding:env(safe-area-inset-top) 16px calc(90px + env(safe-area-inset-bottom))}
+header{display:flex;align-items:center;justify-content:space-between;padding:18px 2px 20px}.brand{font-weight:950;letter-spacing:1.5px;font-size:22px}.brand span{color:var(--red)}.pill{font-size:11px;color:#ff9bab;border:1px solid #6f1c2b;border-radius:99px;padding:6px 9px;background:#250d14}
+.hero{border:1px solid #692033;background:linear-gradient(135deg,#24101a,#11131a 65%);border-radius:22px;padding:20px;position:relative;overflow:hidden;box-shadow:0 12px 35px #0008}.hero:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;right:-65px;top:-60px;background:#ff29481c;filter:blur(4px)}.eyebrow{font-size:11px;color:#ff879a;letter-spacing:1.7px;text-transform:uppercase;font-weight:800}.hero h1{font-size:29px;line-height:1.1;margin:10px 0}.hero p{font-size:13px;color:#c5c8d2;line-height:1.5;max-width:300px}.hero .target{position:absolute;right:18px;top:38px;font-size:56px;color:var(--red);opacity:.9}
+.btn{border:0;border-radius:13px;padding:14px 16px;font-weight:850;letter-spacing:.3px;background:linear-gradient(110deg,#ff2948,#e51636);color:white;box-shadow:0 7px 18px #ff29482b}.btn.secondary{background:#171a22;border:1px solid #353a47;box-shadow:none;color:#f3f3f7}.btn.full{width:100%;margin-top:12px}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:24px 2px 12px}.section-head h2{font-size:16px;margin:0}.section-head small{color:var(--muted)}
+.card{background:linear-gradient(145deg,#151821,#101218);border:1px solid var(--line);border-radius:17px;padding:16px;margin-bottom:12px}.profileline{display:flex;gap:12px;align-items:center}.device{width:44px;height:52px;border:1px solid #555c6b;border-radius:10px;display:grid;place-items:center;color:var(--red);font-size:23px}.sub{font-size:12px;color:var(--muted);line-height:1.5}.metric{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.metric>div{padding:12px;border-radius:12px;background:#0b0d12;border:1px solid #242834}.metric b{display:block;font-size:21px}.metric span{font-size:11px;color:var(--muted)}
+.tabs{position:fixed;bottom:0;left:0;right:0;z-index:5;background:#0b0c11f2;backdrop-filter:blur(18px);border-top:1px solid #282c37;padding:9px 10px calc(8px + env(safe-area-inset-bottom));display:flex;justify-content:center}.tabrow{width:100%;max-width:520px;display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.tab{background:none;border:0;color:#838a9b;font-size:11px;padding:7px 2px;border-radius:11px}.tab .ico{font-size:20px;display:block;margin-bottom:4px}.tab.active{color:#ff435e;background:#32101a}
+.screen{display:none}.screen.active{display:block}
+.slider-row{padding:12px 0;border-bottom:1px solid #262a34}.slider-row:last-child{border-bottom:0}.slider-top{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700}.value{color:#ff516a;font-size:16px;font-weight:900}.range{width:100%;accent-color:var(--red);margin:12px 0 4px}.range-hint{display:flex;justify-content:space-between;color:#777f90;font-size:10px}
+.note{border:1px solid #6b2635;background:#220f16;border-radius:13px;padding:12px;color:#ffd2d9;font-size:12px;line-height:1.5;margin-top:12px}.note strong{color:#ff667e}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.option{background:#11141b;border:1px solid #2c303b;border-radius:13px;padding:13px;text-align:left;color:white}.option.selected{border-color:var(--red);box-shadow:inset 0 0 0 1px #ff29483b}.option b{display:block;font-size:13px;margin:5px 0}.option span{font-size:11px;color:var(--muted);line-height:1.4}
+.checkline{display:flex;gap:10px;align-items:flex-start;padding:11px 0;border-bottom:1px solid #252934;font-size:13px}.checkline input{accent-color:var(--red);width:18px;height:18px;margin-top:1px}.checkline small{display:block;color:var(--muted);font-size:11px;margin-top:4px;line-height:1.4}
+.progress{height:7px;background:#292d37;border-radius:99px;overflow:hidden;margin:12px 0}.progress div{height:100%;background:linear-gradient(90deg,#ff2948,#ff7587);width:0;transition:width .2s}
+.toast{position:fixed;left:20px;right:20px;bottom:100px;max-width:480px;margin:auto;background:#20242e;border:1px solid #4c5262;border-radius:12px;padding:13px;text-align:center;font-size:13px;display:none;z-index:10}
+footer{text-align:center;color:#717889;font-size:10px;line-height:1.5;padding:16px 10px}
+@media(min-width:520px){.app{padding-top:12px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="brand">SENSI <span>FF</span></div><div class="pill">BETA • iPHONE</div></header>
+<section id="home" class="screen active">
+ <div class="hero"><div class="eyebrow">Seu ajuste começa aqui</div><h1>Mais controle.<br><span style="color:#ff405b">Mais capas.</span></h1><p>Recomendações iniciais para iPhone 11, 3 dedos e sensibilidade alta. Teste no treinamento e ajuste ao seu toque.</p><div class="target">◎</div><button class="btn" onclick="showScreen('sensi')">VER MINHA SENSI ↗</button></div>
+ <div class="section-head"><h2>Seu perfil de jogo</h2><small>Personalizado</small></div>
+ <div class="card"><div class="profileline"><div class="device">▯</div><div><b>iPhone 11 • 3 dedos</b><div class="sub">Objetivo: puxar capa · Perfil: alta sensibilidade</div></div></div><div class="metric"><div><b id="avgValue">84</b><span>Média sugerida</span></div><div><b id="doneValue">0/4</b><span>Exercícios concluídos</span></div></div></div>
+ <div class="section-head"><h2>Comece por aqui</h2><small>3 passos</small></div>
+ <div class="card"><div class="profileline"><div style="font-size:24px;color:var(--red)">01</div><div><b>Use a configuração sugerida</b><div class="sub">Copie os valores manualmente para as opções do jogo.</div></div></div><div class="profileline" style="margin-top:15px"><div style="font-size:24px;color:var(--red)">02</div><div><b>Treine por 5–10 minutos</b><div class="sub">Faça puxadas curtas e consistentes no campo de treino.</div></div></div><div class="profileline" style="margin-top:15px"><div style="font-size:24px;color:var(--red)">03</div><div><b>Ajuste aos poucos</b><div class="sub">Mude 3–5 pontos por vez, não tudo de uma vez.</div></div></div><button class="btn secondary full" onclick="showScreen('treino')">ABRIR TREINO DE MIRA</button></div>
+</section>
+<section id="sensi" class="screen">
+ <div class="section-head"><h2>Minha sensibilidade</h2><small>Valores 0–100</small></div>
+ <div class="card"><div class="profileline"><div class="device">▯</div><div><b>Preset: Capa • Alta</b><div class="sub">Ponto de partida para testar no iPhone 11.</div></div></div>
+ <div id="sliders"></div>
+ <button class="btn full" onclick="saveConfig()">SALVAR CONFIGURAÇÃO</button><button class="btn secondary full" onclick="resetConfig()">RESTAURAR SUGESTÕES</button>
+ <div class="note"><strong>Importante:</strong> estes números são sugestões iniciais, não uma configuração universal. O app não altera o Free Fire automaticamente; aplique os valores manualmente dentro do jogo.</div></div>
+ <div class="section-head"><h2>Ajuste rápido</h2></div><div class="grid2"><button class="option" onclick="nudgeAll(3)"><b>↑ Mira mais rápida</b><span>Aumenta tudo em 3 pontos.</span></button><button class="option" onclick="nudgeAll(-3)"><b>↓ Mais controle</b><span>Reduz tudo em 3 pontos.</span></button></div>
+</section>
+<section id="treino" class="screen">
+ <div class="section-head"><h2>Treino de mira</h2><small id="progressText">0 de 4</small></div>
+ <div class="card"><div class="eyebrow">Rotina recomendada</div><h2 style="margin:8px 0">Treino rápido de capa</h2><div class="sub">Marque cada exercício quando terminar. Foque na consistência, não apenas na velocidade.</div><div class="progress"><div id="progressBar"></div></div>
+ <label class="checkline"><input type="checkbox" class="exercise"><span><b>Aquecimento — 2 minutos</b><small>Movimente a mira suavemente e acompanhe um alvo.</small></span></label>
+ <label class="checkline"><input type="checkbox" class="exercise"><span><b>Puxada curta — 3 minutos</b><small>Faça arrastos curtos para cima, sem exagerar no movimento.</small></span></label>
+ <label class="checkline"><input type="checkbox" class="exercise"><span><b>Disparo controlado — 3 minutos</b><small>Treine disparos com pausa e observe se a mira passa da cabeça.</small></span></label>
+ <label class="checkline"><input type="checkbox" class="exercise"><span><b>Teste final — 2 minutos</b><small>Repita o movimento e anote se precisa de mais ou menos sensibilidade.</small></span></label>
+ <button class="btn secondary full" onclick="resetTraining()">REINICIAR TREINO</button></div>
+ <div class="note">Dica: se a mira passar demais do alvo, reduza a sensibilidade Geral em 3–5 pontos. Se ficar curta, aumente 3–5 pontos e teste novamente.</div>
+</section>
+<section id="ajustes" class="screen">
+ <div class="section-head"><h2>Preferências</h2><small>Seu setup</small></div>
+ <div class="card"><b>Perfil atual</b><div class="sub" style="margin-top:5px">iPhone 11 · 3 dedos · objetivo: capa · sensibilidade alta</div><div class="note">No iPhone, não há um controle de DPI convencional acessível como em muitos aparelhos Android. Por isso, este app foca nas opções de sensibilidade do jogo e no treino.</div></div>
+ <div class="section-head"><h2>Como ajustar pelo resultado</h2></div>
+ <div class="card"><div class="profileline"><div style="color:var(--red);font-size:24px">↗</div><div><b>A mira passa da cabeça</b><div class="sub">Diminua Geral e/ou Ponto Vermelho em 3–5 pontos.</div></div></div><div class="profileline" style="margin-top:14px"><div style="color:var(--red);font-size:24px">↗</div><div><b>A mira não chega à cabeça</b><div class="sub">Aumente Geral em 3–5 pontos e repita o teste.</div></div></div><div class="profileline" style="margin-top:14px"><div style="color:var(--red);font-size:24px">◎</div><div><b>Oscila muito</b><div class="sub">Reduza um pouco a sensibilidade e mantenha o mesmo movimento do dedo.</div></div></div></div>
+ <div class="section-head"><h2>Sobre o aplicativo</h2></div><div class="card sub">Sensi FF é uma ferramenta independente de recomendações e treino. Não é afiliada à Garena, não injeta código no jogo e não garante headshots. As configurações salvas ficam neste navegador quando o armazenamento local está disponível.</div>
+ <button class="btn secondary full" onclick="exportConfig()">EXPORTAR CONFIGURAÇÃO</button>
+</section>
+<footer>SENSI FF • Ferramenta de apoio não oficial<br>Os resultados variam conforme jogador, HUD, arma e atualização do jogo.</footer>
+</div>
+<nav class="tabs"><div class="tabrow">
+<button class="tab active" data-screen="home" onclick="showScreen('home')"><span class="ico">⌂</span>Início</button>
+<button class="tab" data-screen="sensi" onclick="showScreen('sensi')"><span class="ico">◎</span>Sensi</button>
+<button class="tab" data-screen="treino" onclick="showScreen('treino')"><span class="ico">◉</span>Treinar</button>
+<button class="tab" data-screen="ajustes" onclick="showScreen('ajustes')"><span class="ico">☰</span>Mais</button>
+</div></nav>
+<div id="toast" class="toast"></div>
+<script>
+const defaults=[["Geral",95,"Resposta da câmera e movimento geral"],["Ponto Vermelho",92,"Ajuste de mira sem ampliação"],["Mira 2x",86,"Controle com ampliação 2x"],["Mira 4x",78,"Controle com ampliação 4x"],["Mira AWM",48,"Precisão com mira de longo alcance"],["Olhadinha",85,"Velocidade ao olhar ao redor"]];
+let values=defaults.map(x=>x[1]);
+function makeSliders(){const root=document.getElementById('sliders');root.innerHTML='';defaults.forEach((d,i)=>{let row=document.createElement('div');row.className='slider-row';row.innerHTML=`<div class="slider-top"><span>${d[0]}</span><span class="value" id="v${i}">${values[i]}</span></div><input class="range" id="r${i}" type="range" min="0" max="100" value="${values[i]}" aria-label="${d[0]}"><div class="range-hint"><span>0 • Baixa</span><span>${d[2]}</span><span>100 • Alta</span></div>`;root.appendChild(row);row.querySelector('input').addEventListener('input',e=>{values[i]=+e.target.value;document.getElementById('v'+i).textContent=values[i];updateAvg()})});updateAvg()}
+function updateAvg(){document.getElementById('avgValue').textContent=Math.round(values.reduce((a,b)=>a+b,0)/values.length)}
+function saveConfig(){try{localStorage.setItem('sensiFF_config',JSON.stringify(values));toast('Configuração salva neste navegador.')}catch(e){toast('Não foi possível salvar automaticamente. Anote os valores.')}} 
+function resetConfig(){values=defaults.map(x=>x[1]);makeSliders();toast('Sugestões iniciais restauradas.')}
+function nudgeAll(n){values=values.map(v=>Math.max(0,Math.min(100,v+n)));makeSliders();toast(n>0?'Ajuste rápido aplicado: +3.':'Ajuste rápido aplicado: -3.')}
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id===id));document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.screen===id));window.scrollTo({top:0,behavior:'smooth'})}
+function toast(msg){let t=document.getElementById('toast');t.textContent=msg;t.style.display='block';clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.style.display='none',2400)}
+function updateTraining(){let boxes=[...document.querySelectorAll('.exercise')],n=boxes.filter(b=>b.checked).length;document.getElementById('doneValue').textContent=n+'/4';document.getElementById('progressText').textContent=n+' de 4';document.getElementById('progressBar').style.width=(n/4*100)+'%'}
+function resetTraining(){document.querySelectorAll('.exercise').forEach(b=>b.checked=false);updateTraining();toast('Treino reiniciado.')}
+function exportConfig(){let text='SENSI FF — iPhone 11 / 3 dedos / Capa / Alta\\n'+defaults.map((d,i)=>d[0]+': '+values[i]).join('\\n')+'\\n\\nValores sugeridos para testar; não são universais.';let blob=new Blob([text],{type:'text/plain'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='minha-sensi-ff.txt';a.click();URL.revokeObjectURL(url);toast('Arquivo de configuração exportado.')}
+document.querySelectorAll('.exercise').forEach(b=>b.addEventListener('change',updateTraining));
+try{let saved=JSON.parse(localStorage.getItem('sensiFF_config'));if(Array.isArray(saved)&&saved.length===values.length)values=saved.map(v=>Math.max(0,Math.min(100,Number(v)||0)))}catch(e){}
+makeSliders();updateTraining();
+</script>
+
+<script>
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js').catch(() => {});
+  });
+}
+</script>
+
+</body>
+</html>
